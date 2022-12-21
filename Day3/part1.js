@@ -1,0 +1,75 @@
+const fs = require("fs");
+const readBuffer = fs.readFileSync("./Day3/input.txt", "utf-8");
+const inputs = readBuffer.split(/\r?\n/).map((line) => line);
+
+const ASCII = {
+  0: "a",
+  1: "b",
+  2: "c",
+  3: "d",
+  4: "e",
+  5: "f",
+  6: "g",
+  7: "h",
+  8: "i",
+  9: "j",
+  10: "k",
+  11: "l",
+  12: "m",
+  13: "n",
+  14: "o",
+  15: "p",
+  16: "q",
+  17: "r",
+  18: "s",
+  19: "t",
+  20: "u",
+  21: "v",
+  22: "w",
+  23: "x",
+  24: "y",
+  25: "z",
+  26: "A",
+  27: "B",
+  28: "C",
+  29: "D",
+  30: "E",
+  31: "F",
+  32: "G",
+  33: "H",
+  34: "I",
+  35: "J",
+  36: "K",
+  37: "L",
+  38: "M",
+  39: "N",
+  40: "O",
+  41: "P",
+  42: "Q",
+  43: "R",
+  44: "S",
+  45: "T",
+  46: "U",
+  47: "V",
+  48: "W",
+  49: "X",
+  50: "Y",
+  51: "Z",
+};
+
+let totalSum = 0;
+
+inputs.forEach((input) => {
+  const half = Math.floor(input.length / 2);
+
+  const left = new Set([...input.substring(0, half)]);
+  const right = new Set([...input.substring(half, input.length)]);
+
+  Object.entries(ASCII).forEach(([priority, char]) => {
+    if (left.has(char) && right.has(char)) {
+      totalSum += parseInt(priority) + 1;
+    }
+  });
+});
+
+console.log(totalSum);
